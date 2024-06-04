@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 
 from controllers.position import position_controller
-from controllers.controller2 import controller2
+from controllers.user import user_controller
 from bson.json_util import dumps
 from dotenv import load_dotenv
 
@@ -13,7 +13,7 @@ app = Flask(__name__)
 init_app(app)
 
 app.register_blueprint(position_controller)
-app.register_blueprint(controller2)
+app.register_blueprint(user_controller)
 
 @app.route('/data', methods=['POST'])
 def add_data():

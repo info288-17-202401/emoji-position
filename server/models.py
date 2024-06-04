@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, UUID4, validator
-from typing import Optional
+from typing import Optional, List
 import uuid
 from datetime import datetime
 from emoji import UNICODE_EMOJI
@@ -8,13 +8,17 @@ class Location(BaseModel):
     latitude: float
     longitude: float
 
+class Position(BaseModel):
+    userId: str
+    location: Location
+
 class User(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()), alias="_id")
     userId: int
-    location: Location
     dateRecorded: datetime
     emojiId: str
     sessionId: Optional[str] = None
+    positions: List[Position] = []
 
     class Config:
         arbitrary_types_allowed=True,
