@@ -9,8 +9,9 @@ class Location(BaseModel):
     longitude: float
 
 class Position(BaseModel):
-    userId: str
+    userId: int
     location: Location
+    dateRecorded: datetime = Field(default_factory=datetime.now)
 
 class User(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()), alias="_id")
