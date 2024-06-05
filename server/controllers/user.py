@@ -16,22 +16,27 @@ def index():
 
 def post_user():
     try:
-        user = User(**request.json)
-        
-        userId = user.userId
-        sessionId = user.sessionId
+        data = request.json
+        sessionId = user['sessionId']
         
         if sessionId is None:
             return jsonify({"error": "sessionId is required"}), 400
-
-        if userId is None:
-            # Aquí puedes insertar `user` en tu base de datos
+        
+        user = mongo.db.users.find_one({"sessionId": sessionId})
+        if not user:
+            user = User(**request.json)
+            next_user_id = mongo.db.users.find_one(sort=[("userId", -1)])["userId"] + 1
+            user.userId = next_user_id
             mongo.db.users.insert_one(user.dict())
             
             return jsonify({"user": user.dict(), "response": "inserted"}), 201
         else:
-            # Aquí puedes actualizar `user` en tu base de datos
-            res = mongo.db.users.update_one({"userId": userId}, {"$set": user.dict()})
+            if 'userId' in data and data['userId'] != user['userId']:
+                return jsonify({"error": "userId cannot be changed"}), 400
+            
+            user = User(**user)
+            
+            res = mongo.db.users.update_one({"sessionId": sessionId}, {"$set": user.dict()})
             
             if res.modified_count == 0:
                 return jsonify({"error": "User not found"}), 404

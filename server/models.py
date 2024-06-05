@@ -15,10 +15,10 @@ class Position(BaseModel):
 
 class User(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()), alias="_id")
-    userId: int
-    dateRecorded: datetime
+    userId: Optional[int] = None
+    dateRecorded: datetime = Field(default_factory=datetime.now)
     emojiId: str
-    sessionId: Optional[str] = None
+    sessionId: str
     positions: List[Position] = []
 
     class Config:
