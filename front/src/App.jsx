@@ -13,7 +13,7 @@ const App = () => {
   useEffect(() => {
     console.log("aa")
     login();
-  }, [login]);
+  }, []);
 
 
   const handleAccept = () => {
@@ -32,6 +32,8 @@ const App = () => {
       alert('La geolocalización no es compatible con este navegador.');
     }
   };
+
+  console.log("QUE PAZAA")
 
   return (
     <div className="app">

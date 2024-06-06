@@ -6,7 +6,19 @@ import Point from '@arcgis/core/geometry/Point';
 import PictureMarkerSymbol from '@arcgis/core/symbols/PictureMarkerSymbol';
 import '@arcgis/core/assets/esri/themes/light/main.css';
 
+import useSession from './useSession';
+
 const ArcGISMap = () => {
+  const [session, login, logout] = useSession();
+
+  useEffect(() => {
+    login();
+  }, []);
+
+  useEffect(() => {
+    console.log("session cambio: ", session)
+  }, [session])
+
   const mapRef = useRef(null);
 
   useEffect(() => {

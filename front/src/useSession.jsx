@@ -4,23 +4,17 @@ import { v4 as uuidv4 } from 'uuid';
 const useSession = () => {
   const [session, setSession] = useState(null);
 
-  useEffect(() => {
-    const savedSession = localStorage.getItem('session');
-    if (savedSession) {
-      setSession(JSON.parse(savedSession));
-    }
-  }, []);
-
   const login = () => {
-    savedSession = JSON.parse(localStorage.getItem('session'));
-    if (savedSession) {
-      setSession(savedSession);
-      return;
+    let currentSession = localStorage.getItem('session');
+    if (currentSession) {
+      currentSession = JSON.parse(currentSession);
+      setSession(currentSession);
+    } else{
+      const newSession = { sessionId: uuidv4() };
+      setSession(newSession);
+      localStorage.setItem('session', JSON.stringify(newSession));
+      currentSession = newSession
     }
-
-    const newSession = { sessionId: uuidv4() };
-    setSession(newSession);
-    localStorage.setItem('session', JSON.stringify(newSession));
 
     const emojis = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😡']
 
@@ -31,7 +25,7 @@ const useSession = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        sessionId: newSession.sessionId,
+        sessionId: currentSession.sessionId,
         emojiId: emojis[Math.floor(Math.random() * emojis.length)],
       }),
     })

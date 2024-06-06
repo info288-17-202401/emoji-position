@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './ArcGISMap.jsx'
+import ArcGISMap from './ArcGISMap.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <ArcGISMap />
   </React.StrictMode>,
 )
