@@ -8,16 +8,14 @@ const useSession = () => {
     let currentSession = localStorage.getItem('session');
     if (currentSession) {
       currentSession = JSON.parse(currentSession);
-      setSession(currentSession);
-    } else{
+    } else {
       const newSession = { sessionId: uuidv4() };
-      setSession(newSession);
       localStorage.setItem('session', JSON.stringify(newSession));
-      currentSession = newSession
+      currentSession = newSession;
     }
-
-    const emojis = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😡']
-
+  
+    const emojis = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😡'];
+    
     // make a post to the server
     fetch('http://localhost:5000/user', {
       method: 'POST',
@@ -30,9 +28,10 @@ const useSession = () => {
       }),
     })
     .then(response => response.json())
-    .then(data => console.log('Server response:', data))
-    .catch(error => console.error('Server error:', error))
-
+    .then(data => {console.log('Server response:', data);
+      setSession(currentSession);
+     })
+    .catch(error => console.error('Server error:', error));
   };
 
   const logout = () => {

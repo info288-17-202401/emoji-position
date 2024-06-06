@@ -5,7 +5,7 @@ from db import mongo
 
 position_controller = Blueprint('position_controller', __name__, url_prefix='/position')
 
-@position_controller.route('/', methods=['POST', 'GET'])
+@position_controller.route('', methods=['POST', 'GET'])
 def position():
     # check type of method is 
     if request.method == 'POST':

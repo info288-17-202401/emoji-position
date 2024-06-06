@@ -17,7 +17,7 @@ def index():
 def post_user():
     try:
         data = request.json
-        sessionId = user['sessionId']
+        sessionId = data['sessionId']
         
         if sessionId is None:
             return jsonify({"error": "sessionId is required"}), 400

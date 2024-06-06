@@ -28,7 +28,7 @@ const ArcGISMap = () => {
       console.log("Geolocation is not supported by this browser.");
     }
 
-    login();
+    if (!session) login();
   }, []);
 
   useEffect(() => {
@@ -36,14 +36,14 @@ const ArcGISMap = () => {
       const intervalId = setInterval(() => {
         let {latitude, longitude} = currentPosition;
 
-        fetch('http://localhost:5000/position', {
+        fetch('http://127.0.0.1:5000/position', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             sessionId: session.sessionId,
-            position: {
+            location: {
               longitude,
               latitude
             }
@@ -53,12 +53,11 @@ const ArcGISMap = () => {
         .then(data => console.log('Server response:', data))
         .catch(error => console.error('Error:', error));
 
-        fetch('http://localhost:5000/position', {
+        fetch('http://127.0.0.1:5000/position', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-          credentials: 'include', // Incluye las credenciales en la solicitud
         })
         .then(response => response.json())
         .then(data => {
