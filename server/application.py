@@ -4,12 +4,15 @@ from controllers.position import position_controller
 from controllers.user import user_controller
 from bson.json_util import dumps
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 from db import init_app
 
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5173"}})
+
 init_app(app)
 
 app.register_blueprint(position_controller)

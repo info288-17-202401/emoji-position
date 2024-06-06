@@ -57,7 +57,8 @@ const ArcGISMap = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-          }
+          },
+          credentials: 'include', // Incluye las credenciales en la solicitud
         })
         .then(response => response.json())
         .then(data => {
