@@ -14,6 +14,7 @@ const App = () => {
           const { latitude, longitude } = position.coords;
           setLocation({ latitude, longitude });
           setShowModal(false);
+          setShowES(true);
         },
         error => {
           console.error('Error al obtener la ubicación:', error);

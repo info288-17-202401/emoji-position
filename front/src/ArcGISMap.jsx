@@ -8,6 +8,13 @@ import '@arcgis/core/assets/esri/themes/light/main.css';
 
 const ArcGISMap = () => {
   const mapRef = useRef(null);
+  const emojis = [
+    'https://img.icons8.com/?size=512&id=PEmFcgjhBgKF&format=png',
+    'https://img.icons8.com/?size=512&id=BDv3d2v8kzSg&format=png',
+    'https://img.icons8.com/?size=512&id=3GmNQSEMEZJI&format=png',
+    'https://img.icons8.com/?size=512&id=bY5t0noHcfXn&format=png',
+    'https://img.icons8.com/?size=512&id=0mtgUqNnGOy0&format=png'
+  ];
 
   useEffect(() => {
     // Crear el mapa web
@@ -19,21 +26,21 @@ const ArcGISMap = () => {
     const view = new MapView({
       container: mapRef.current,
       map: webMap,
-      center: [-118.80500, 34.02700], // Longitud, latitud
-      zoom: 13
+      center: [-73.24, -39.81], // Longitud, latitud
+      zoom: 10
     });
 
     // Crear el símbolo de marcador de imagen
     const pictureMarkerSymbol = new PictureMarkerSymbol({
-      url: 'https://static-00.iconduck.com/assets.00/cat-face-emoji-512x455-gda5rvrc.png',
-      width: '24px',
-      height: '24px'
+      url: emojis[1],
+      width: '34px',
+      height: '34px'
     });
 
     // Crear un punto
     const point = new Point({
-      longitude: -118.80500,
-      latitude: 34.02700
+      longitude: -73.24,
+      latitude: -39.82
     });
 
     // Crear el gráfico utilizando el símbolo de marcador de imagen
