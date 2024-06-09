@@ -91,21 +91,21 @@ const ArcGISMap = () => {
     const view = new MapView({
       container: mapRef.current,
       map: webMap,
-      center: [-118.80500, 34.02700], // Longitud, latitud
-      zoom: 13
+      center: [-73.24, -39.81], // Longitud, latitud
+      zoom: 10
     });
 
     // Crear el símbolo de marcador de imagen
     const pictureMarkerSymbol = new PictureMarkerSymbol({
-      url: emojis[1],
+      url: emojis[3],
       width: '34px',
       height: '34px'
     });
 
     // Crear un punto
     const point = new Point({
-      longitude: -118.80500,
-      latitude: 34.02700
+      longitude: -73.24,
+      latitude: -39.82
     });
 
     // Crear el gráfico utilizando el símbolo de marcador de imagen
@@ -125,7 +125,7 @@ const ArcGISMap = () => {
     };
   }, [currentPosition]);
 
-  return <div style={{ height: '100vh', width: '100vw' }} ref={mapRef}></div>;
+  return <div style={{ height: '89vh', width: '55vw' }} ref={mapRef}></div>;
 };
 
 export default ArcGISMap;
