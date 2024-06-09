@@ -1,29 +1,22 @@
 from flask import Flask, jsonify, request
-from flask_pymongo import PyMongo
-from pymongo.errors import PyMongoError
-from controllers.controller1 import controller1
-from controllers.controller2 import controller2
+
+from controllers.position import position_controller
+from controllers.user import user_controller
 from bson.json_util import dumps
 from dotenv import load_dotenv
-import os
+from flask_cors import CORS
+
+from db import init_app
 
 load_dotenv()
 
 app = Flask(__name__)
-app.register_blueprint(controller1)
-app.register_blueprint(controller2)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Configura la conexión a MongoDB
-app.config["MONGO_URI"] = os.getenv("MONGO_URI")
-mongo = PyMongo(app)
+init_app(app)
 
-# Verifica la conexión a MongoDB
-try:
-    mongo.db.command("serverStatus")
-    print("Connected to MongoDB successfully")
-except PyMongoError as e:
-    print("Failed to connect to MongoDB", str(e))
-    exit(1)
+app.register_blueprint(position_controller)
+app.register_blueprint(user_controller)
 
 @app.route('/data', methods=['POST'])
 def add_data():
