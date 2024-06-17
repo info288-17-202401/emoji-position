@@ -1,0 +1,8 @@
+aceptar compartir ubicacion.
+elegir emoji
+se guarda en estados la posicion y el emoji seleccionado
+y se actualiza en tiempo real la posicion
+se envia cada 5 segundos la informacion al servidor
+se recive cada  5 segundo la informacion para pintar el mapa
+
+cada vez que se recive la informacion de pinta el mapa con las posiciones actualizadas
