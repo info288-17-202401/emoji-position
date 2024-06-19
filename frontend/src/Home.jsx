@@ -40,16 +40,11 @@ const Home = () => {
                 "emojiId" : selectedEmoji,
                 "timestamp":timestamp,
                 "testeando":"limites"
-                /*latitude,
-                longitude,
-                emojiId: selectedEmoji + 1, // Los índices de emojis empiezan desde 1
-                timestamp,
-                sessionId*/
               };
 
               console.log(data);
 
-              axios.post('http://127.0.0.1:5000/saveposition', data)
+              axios.post(process.env.REACT_APP_API_URL + "/saveposition", data)
                 .then(response => {
                   console.log('Position sent:', response.data);
                 })

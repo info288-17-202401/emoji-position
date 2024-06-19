@@ -23,7 +23,7 @@ const MyMapComponent = () => {
   useEffect(() => {
     const fetchPositions = () => {
       console.log('Fetching positions');
-      axios.get('http://127.0.0.1:5000/getpositions')
+      axios.get(process.env.REACT_APP_API_URL + '/getpositions')
         .then(response => {
           setPositions(response.data);
           console.log('Positions fetched:', response.data);
