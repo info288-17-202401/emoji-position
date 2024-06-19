@@ -26,23 +26,20 @@ entrar a modo i para poder pegar en vim
 
 pegar siguiente codigo:
 
-# Define upstream group for backend servers
+
 upstream backend_servers {
     server localhost:5000 weight=1;
     server localhost:5001 weight=1;
 }
 
-# Main server configuration
 server {
     listen 80; # Listen on port 80
 
-    # Serve static files from the 'public' directory
     location / {
         root /home/odrigor/Desktop/emojiposition/emoji-position/front/dist;
         index index.html index.htm;
     }
 
-    # Proxy requests to backend servers
     location /api {
         proxy_pass http://backend_servers;
         proxy_set_header Host $host;
