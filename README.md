@@ -34,12 +34,10 @@ upstream backend_servers {
 
 server {
     listen 80; # Listen on port 80
-
     location / {
         root /home/odrigor/Desktop/emojiposition/emoji-position/front/dist;
         index index.html index.htm;
     }
-
     location /api {
         proxy_pass http://backend_servers;
         proxy_set_header Host $host;
