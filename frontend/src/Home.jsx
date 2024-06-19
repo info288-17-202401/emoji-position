@@ -43,7 +43,7 @@ const Home = () => {
 
               console.log(data);
 
-              axios.post("http://localhost:5000/api/saveposition", data)
+              axios.post("http://hernangallardo.me/api/saveposition", data)
                 .then(response => {
                   console.log('Position sent:', response.data);
                 })
