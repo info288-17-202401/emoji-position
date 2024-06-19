@@ -1,4 +1,4 @@
-# Utiliza una imagen de Node como base
+# Utiliza una imagen de Node como base para la etapa de construcción
 FROM node:16 AS build-stage
 
 # Establece el directorio de trabajo en el contenedor
@@ -16,7 +16,7 @@ COPY . .
 # Construye la aplicación para producción
 RUN npm run build
 
-# Etapa de producción: Utiliza serve para servir la aplicación construida
+# Etapa de producción: Utiliza una nueva imagen de Node
 FROM node:16
 
 # Instala el paquete serve globalmente
@@ -26,7 +26,7 @@ RUN npm install -g serve
 COPY --from=build-stage /app/dist /app
 
 # Expone el puerto que serve escuchará
-EXPOSE 5000
+EXPOSE 8080
 
 # Comando para iniciar serve y servir la aplicación
-CMD ["serve", "-s", "/app", "-l", "5000"]
+CMD ["serve", "-s", "/app", "-l", "8080"]

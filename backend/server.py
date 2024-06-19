@@ -71,6 +71,7 @@ if __name__ == '__main__':
     if not port:
         port = 5000 
     try:
-        app.run(debug=True)
+        print(f"Starting server on port !! {port}")
+        app.run(debug=True, port=port)
     except (KeyboardInterrupt, SystemExit):
         scheduler.shutdown()
