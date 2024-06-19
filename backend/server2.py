@@ -67,10 +67,10 @@ def get_positions():
         return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':
-    port = os.environ.get('PORT')
+    port = os.environ.get('PORT2')
     if not port:
-        port = 5000 
+        port = 5002
     try:
-        app.run(debug=True)
+        app.run(debug=True, port=port)
     except (KeyboardInterrupt, SystemExit):
         scheduler.shutdown()

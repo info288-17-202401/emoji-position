@@ -3,7 +3,6 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import Modal from './Modal';
 import Hello from './MyMapComponent';
-import './App.css';
 import './EmojiSelector.css';
 
 const Home = () => {
@@ -44,7 +43,7 @@ const Home = () => {
 
               console.log(data);
 
-              axios.post(process.env.REACT_APP_API_URL + "/saveposition", data)
+              axios.post("http://localhost:5000/api/saveposition", data)
                 .then(response => {
                   console.log('Position sent:', response.data);
                 })
