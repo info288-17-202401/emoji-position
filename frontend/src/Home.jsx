@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import Modal from './Modal';
-import Hello from './MyMapComponent';
+import MyMapComponent from './MyMapComponent';
 import './EmojiSelector.css';
 
 const Home = () => {
@@ -10,6 +10,7 @@ const Home = () => {
   const [showModal, setShowModal] = useState(true);
   const [showEmojiSelector, setShowEmojiSelector] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
+  const [mapisready, setMapisready] = useState(false);
   const [sessionId] = useState(uuidv4());
 
   const emojis = [
@@ -46,6 +47,7 @@ const Home = () => {
               axios.post("https://hernangallardo.me/api/saveposition", data)
                 .then(response => {
                   console.log('Position sent:', response.data);
+                  setMapisready(true);
                 })
                 .catch(error => {
                   console.error('Error sending position:', error);
@@ -88,7 +90,7 @@ const Home = () => {
 
   const handleEmojiSelect = (index) => {
     setSelectedEmoji(index);
-    console.log(index)
+    console.log(index);
     setShowEmojiSelector(false);
     
   };
@@ -114,7 +116,8 @@ const Home = () => {
           </div>
         </div>
       )}
-      {selectedEmoji !== null && <Hello></Hello>}
+      { showModal==false && mapisready==false && showEmojiSelector==false && <p className='waiting-text'>Esperando respuesta del servidor 😅 </p> /*😳 */}
+      {mapisready && <MyMapComponent></MyMapComponent>}
     </div>
   );
 };
