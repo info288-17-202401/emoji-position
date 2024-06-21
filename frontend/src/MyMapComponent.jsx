@@ -21,21 +21,21 @@ const MyMapComponent = () => {
   ];
 
   useEffect(() => {
-    const fetchPositions = () => {
-      console.log('Fetching positions');
-      axios.get('http://hernangallardo.me/api/getpositions')
-        .then(response => {
-          setPositions(response.data);
-          console.log('Positions fetched:', response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching positions:', error);
-        });
+    const fetchPositions = async () => {
+      try {
+        const response = await axios.get('https://hernangallardo.me/api/getpositions');
+        setPositions(response.data);
+        console.log('Positions fetched:', response.data);
+      } catch (error) {
+        console.error('Error fetching positions:', error);
+      }
     };
 
-    fetchPositions(); // Fetch positions initially
-    const intervalId = setInterval(fetchPositions, 10000); // Fetch positions every 10 seconds
+    // Fetch positions initially and set the interval for subsequent updates
+    fetchPositions();
+    const intervalId = setInterval(fetchPositions, 10000);
 
+    // Clean up the interval on component unmount to prevent memory leaks
     return () => clearInterval(intervalId);
   }, []);
 
@@ -86,7 +86,7 @@ const MyMapComponent = () => {
     }
   }, [positions]);
 
-  return <div style={{ height: '89vh', width: '55vw' }} ref={mapRef}></div>;
+  return <div style={{ height: '100vh', width: '100vw' }} ref={mapRef}></div>;
 };
 
 export default MyMapComponent;
