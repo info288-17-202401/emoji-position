@@ -23,7 +23,7 @@ const MyMapComponent = () => {
   useEffect(() => {
     const fetchPositions = async () => {
       try {
-        const response = await axios.get('https://hernangallardo.me/api/getpositions');
+        const response = await axios.get('https://emojiposition.com/api/getpositions');
         setPositions(response.data);
         console.log('Positions fetched:', response.data);
       } catch (error) {

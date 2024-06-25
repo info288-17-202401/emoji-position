@@ -4,6 +4,8 @@
   font-optical-sizing: auto;
   font-weight: 377;
   font-style: normal;
+  margin: 0;
+  padding: 0;
 }
 .modal {
   position: fixed;

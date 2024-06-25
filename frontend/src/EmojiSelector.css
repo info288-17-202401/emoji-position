@@ -1,3 +1,7 @@
+html, body {
+  height: 100vh;
+  margin: 0;
+}
 .modal {
     display: flex;
     justify-content: center;
@@ -54,4 +58,26 @@
     left: 50%; 
     transform: translate(-50%, -21%);
 
+  }
+
+  .wimage{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: 80vh;
+    object-fit: cover;
+  }
+
+  .pantalla-carga {
+    position: fixed; /* Posiciona el elemento en la parte superior de la ventana */
+    top: 0; /* Ajusta el borde superior del elemento a la parte superior de la ventana */
+    left: 0; /* Ajusta el borde izquierdo del elemento al borde izquierdo de la ventana */
+    width: 100%; /* Ocupa el ancho total de la ventana */
+    height: 100vh; /* Ocupa el alto total de la ventana (viewport height) */
+    background-color: #fff; /* Color de fondo blanco */
+    display: flex; /* Activa el modo de diseño flexible */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
   }

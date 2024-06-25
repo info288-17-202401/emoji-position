@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Modal from './Modal';
 import MyMapComponent from './MyMapComponent';
 import './EmojiSelector.css';
+import loadingimg from './w3.webp'
 
 const Home = () => {
   const [location, setLocation] = useState(null);
@@ -41,16 +42,14 @@ const Home = () => {
                 "timestamp":timestamp,
                 "testeando":"limites"
               };
-
-              console.log(data);
-
-              axios.post("https://hernangallardo.me/api/saveposition", data)
+              axios.post("https://emojiposition.com/api/saveposition", data)
                 .then(response => {
                   console.log('Position sent:', response.data);
                   setMapisready(true);
                 })
                 .catch(error => {
                   console.error('Error sending position:', error);
+                  setMapisready(true);
                 });
             }
           },
@@ -116,7 +115,7 @@ const Home = () => {
           </div>
         </div>
       )}
-      { showModal==false && mapisready==false && showEmojiSelector==false && <p className='waiting-text'>Esperando respuesta del servidor 😅 </p> /*😳 */}
+      { !showModal && !mapisready && !showEmojiSelector && <img className='pantalla-carga' src={loadingimg} alt='loading-image'></img> /*😳 */}
       {mapisready && <MyMapComponent></MyMapComponent>}
     </div>
   );
