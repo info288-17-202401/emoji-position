@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import Modal from './Modal';
 import MyMapComponent from './MyMapComponent';
 import './EmojiSelector.css';
-import loadingimg from './w3.webp'
-
+import horizontalLoadingImage from './himg.webp'
+import verticalLoadingImage from './vimg.webp'
 const Home = () => {
   const [location, setLocation] = useState(null);
   const [showModal, setShowModal] = useState(true);
@@ -115,7 +115,19 @@ const Home = () => {
           </div>
         </div>
       )}
-      { !showModal && !mapisready && !showEmojiSelector && <img className='pantalla-carga' src={loadingimg} alt='loading-image'></img> /*😳 */}
+
+{
+  !showModal && !mapisready && !showEmojiSelector && (
+    <div >
+      {window.innerWidth > window.innerHeight ? (
+        <img className="pantalla-carga" src={horizontalLoadingImage} alt="Horizontal loading image" />
+      ) : (
+        <img className="pantalla-carga" src={verticalLoadingImage} alt="Vertical loading image" />
+      )}
+    </div>
+  )
+}
+
       {mapisready && <MyMapComponent></MyMapComponent>}
     </div>
   );
